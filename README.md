@@ -31,6 +31,8 @@ data
 5) After the training, check if the appropriate models are saved in the respective folders (self-explanatory from the code)
 6) Testing the model on random folder of images. Run
 > `python test.py --testdir <path_to_testdir> --preddir <path_to_save_predictions> --model <path_to_trained_model>`
+7) The cams folder contains `keras_cam.py`. You can run it by using :
+> `python keras_cam.py -m <path_to_trained_model> -t <path_to_testdir> -s <path_to_savedir>`
 
 ### Acknowledgements
 This repo is adapted from the github repo : https://github.com/arunponnusamy/gender-detection-keras. The authors would like to thank Arun Ponnusamy for his amazing work and sharing the code to build and continue working together without "rediscovering the wheel". 
