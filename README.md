@@ -23,14 +23,14 @@ data
 │   ├── class0
 │   ├── class1
 ```
-4) There are two training scripts `train.py` and `train_pretrained.py`. Run both as follows :
-   > `python train.py -d  <path_to_dataset>`  
-   > `python train_pretrained.py -d  <path_to_dataset>`   
-- In case, you want to change other parameters from default, please run the following command to check what are the default parameters:
-   > `python train_pretrained.py --help`
+4) There is one training script to generate all the models : `train.py`. 
+    - To generate model A and B:
+   > `python train.py -d  <path_to_dataset>`
+    - To generate model C:
+   > `python train.py -d  <path_to_dataset> -f True -mp <path_to_styled_model (model B)>`
 5) After the training, check if the appropriate models are saved in the respective folders (self-explanatory from the code)
 6) Testing the model on random folder of images. Run
-> `python detect_gender.py --testdir <path_to_testdir> --preddir <path_to_save_predictions> --model <flag_for_styled_model>`
+> `python test.py --testdir <path_to_testdir> --preddir <path_to_save_predictions> --model <path_to_trained_model>`
 
 ### Acknowledgements
 This repo is adapted from the github repo : https://github.com/arunponnusamy/gender-detection-keras. The authors would like to thank Arun Ponnusamy for his amazing work and sharing the code to build and continue working together without "rediscovering the wheel". 
