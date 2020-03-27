@@ -28,7 +28,7 @@ ap.add_argument("-t", "--testdir", required=True, #type=str, default="classifica
 ap.add_argument("-p", "--preddir", required=True, #type=str, default="predictions_B_softmax",
 	help="path to predictions' folder")
 ap.add_argument("-m", "--model", required=True,
-	help="pass True if want the styled model")
+	help="Path to the trained model")
 ap.add_argument("-hq", "--high_quality", type=bool, default=False)
 
 args = ap.parse_args()
