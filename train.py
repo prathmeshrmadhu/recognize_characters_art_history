@@ -30,7 +30,7 @@ from keras.models import load_model
 # initial parameters
 seed = 42
 random.seed(seed)
-epochs = 100
+epochs = 2
 lr = 1e-4
 batch_size = 32
 img_dims = (224, 224, 3)
@@ -45,7 +45,7 @@ ap.add_argument("-d", "--dataset", type=str, default="datasets/classification_ma
 ap.add_argument("-m", "--model", type=str, default="gender_detection.model",
                 help="path to output model")
 ap.add_argument("-n", "--expname", type=str,
-                default= 'C_cropped_softmax_' + VGGFace.__name__ + "_pretrained_resnet_E" + str(epochs) + "_B" + str(batch_size) +  "_I" + str(img_dims[0]), help="name of the experiment")
+                default= 'A-model', help="name of the experiment")
 ap.add_argument("-f", "--finetune", type=bool, default=False, help='Flag to decide the finetuning on art history data')
 ap.add_argument("-mp", "--pretrained_model_path", type=str, help='Path to pretrained model path. Pass only if style:True')
 
