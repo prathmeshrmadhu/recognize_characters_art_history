@@ -12,8 +12,6 @@ import os, glob
 import cvlib as cv
 import matplotlib.pyplot as plt
 
-from pandas_ml import ConfusionMatrix
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -130,7 +128,7 @@ for imagename in image_files:
             plt.savefig(high_quality_image_name, format='eps', dpi=1000)
             
 cm_folder = 'final_stuff/confusion_matrix/' 
-if not os.path.exists(cm_folder):
+if not os.path.isdir(cm_folder):
     os.makedirs(cm_folder)
     
 cm_path = cm_folder + model_path.split('/')[-1].split('.')[0] + '_confusion_matrix.eps'

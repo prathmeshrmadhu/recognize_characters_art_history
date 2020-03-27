@@ -3,7 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
-from utils import cm_analysis
 
 def cm_analysis(y_true, y_pred, filename, labels, ymap=None, figsize=(10,10)):
     """

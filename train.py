@@ -30,7 +30,7 @@ from keras.models import load_model
 # initial parameters
 seed = 42
 random.seed(seed)
-epochs = 2
+epochs = 1
 lr = 1e-4
 batch_size = 32
 img_dims = (224, 224, 3)
@@ -60,7 +60,7 @@ image_files = [f for f in glob.glob(args.dataset + "/**/*", recursive=True) if n
 random.shuffle(image_files)
 
 # create groud-truth label from the image path
-for img in image_files:
+for img in image_files[:100]:
 
     image = cv2.imread(img)
     image = cv2.resize(image, (img_dims[0], img_dims[1]))
@@ -135,16 +135,20 @@ for train, test in kfold.split(data, labels):
     cvscores.append(scores[1] * 100)
 
     # save the model to disk
+    if not os.path.isdir('model_snaps'):
+        print ('Making model_snaps dir')
+        os.makedirs('model_snaps')
     model.save('model_snaps/' + args.expname + '_cvfold_' + str(itr) + '.model')
 
     # plot training/validation loss/accuracy
     plt.style.use("ggplot")
     plt.figure()
     N = min(len(H.history["loss"]), epochs)
+    print (H.history.keys())
     plt.plot(np.arange(0, N), H.history["loss"], label="train_loss")
     plt.plot(np.arange(0, N), H.history["val_loss"], label="val_loss")
-    plt.plot(np.arange(0, N), H.history["acc"], label="train_acc")
-    plt.plot(np.arange(0, N), H.history["val_acc"], label="val_acc")
+    plt.plot(np.arange(0, N), H.history["accuracy"], label="train_acc")
+    plt.plot(np.arange(0, N), H.history["val_accuracy"], label="val_acc")
 
     plt.title("Training Loss and Accuracy" + " cvfold_" + str(itr))
     plt.xlabel("Epoch #")
@@ -152,10 +156,16 @@ for train, test in kfold.split(data, labels):
     plt.legend(loc="upper right")
 
     # save plot to disk
+    if not os.path.isdir('plots/'):
+        print ('Making plots dir')
+        os.makedirs('plots')
     plt.savefig('plots/' + args.expname + '_cvfold_' + str(itr) + '.png')
 
     # saving the history of the experiment to json
     hist_df = pd.DataFrame(H.history)
+    if not os.path.isdir('history_logs/'):
+        print ('Making history_logs dir')
+        os.makedirs('history_logs')
     hist_json_file = "history_logs/" + args.expname + '_cvfold_' + str(itr) + '.json'
     with open(hist_json_file, mode='w') as f:
         hist_df.to_json(f)
